@@ -8,8 +8,8 @@ function shuffle_init() {
 
                 dataShare.onMessageRecieved.add( function(e) {
                    if ( e.message == 'do_shuffle' )
-                       do_shuffle(1, false);)
-                } );
+                       do_shuffle(1, false);
+                });
 
                 dataShare.onStateChanged.add( function(e) {
                                 s = dataShare.getState();
