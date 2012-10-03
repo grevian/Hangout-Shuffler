@@ -105,10 +105,12 @@ function shuffle_init() {
                         }
                         
                         // Animate or sync the shuffle on everyone else if this is the initator
-                        if ( x == 1 && isMaster )
+												if ( isMaster ) {
+                            if ( isMaster )
                                 dataShare.setValue( 'shuffle_to', JSON.stringify(shuffled_users) );
-                        else
+                            else
                                 dataShare.sendMessage('do_shuffle');
+												}
 
                         // Animate to our next or final position locally
                         $('#testlist').quicksand( p.children(), { duration: 400, adjustHeight: false, }, function() { do_shuffle(x-1, isMaster); });
