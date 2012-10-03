@@ -21,7 +21,7 @@ function shuffle_init() {
 
                 dataShare.onStateChanged.add( function(e) {
                                 s = dataShare.getState();
-                                if ('user_list' in e.addKeys) {
+                                if ('user_list' in e.addedKeys) {
                                   user_list = eval(s['user_list']);
                                   $('#testlist').empty();
                                   for ( var i = 0; i < user_list.length; i++ ) {
@@ -31,7 +31,7 @@ function shuffle_init() {
                                       $('#testlist').prepend("<li data-id='id-" + user_id +"'>" + username + "</li>");
                                   }
                                 }
-                                if ('shuffle_to' in e.addKeys ) {
+                                if ('shuffle_to' in e.addedKeys ) {
                                   var shuffled_users = eval( s['shuffle_to'] );
 
                                   // Create the model to animate to
