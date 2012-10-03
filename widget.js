@@ -14,7 +14,7 @@ function shuffle_init() {
                 var dataShare = gapi.hangout.data;
                 var user_list = [];
 
-                dataShare.onMessageRecieved.add( function(e) {
+                dataShare.onMessageReceived.add( function(e) {
                    if ( e.message == 'do_shuffle' )
                        do_shuffle(1, false);
                 });
