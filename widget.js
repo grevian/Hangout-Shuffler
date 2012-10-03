@@ -16,7 +16,7 @@ function shuffle_init() {
 
         s = dataShare.getState();
         if ( 'user_list' in s ) {
-                id = s['id'];
+                id = parseInt(s['id']);
                 user_list = eval(s['user_list']);
                 $('#testlist').empty();
                 for ( var i = 0; i < user_list.length; i++ ) {
@@ -77,7 +77,7 @@ function shuffle_init() {
                 // Share the new user with other clients
                 var user_list_json = JSON.stringify( user_list );
                 dataShare.setValue( 'user_list', user_list_json );
-                dataShare.setValue( 'id', id );
+                dataShare.setValue( 'id', id.toString() );
 
                 // update UI
                 $('#testlist').prepend("<li data-id='id-" + id +"'>" + newUser + "</li>");
