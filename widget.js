@@ -1,4 +1,12 @@
-gapi.hangout.onApiReady.add( function() { shuffle_init(); } );
+gapi.hangout.onApiReady.add( function(eventObj) { 
+                try {
+                if ( eventObj.isApiReady )
+                  shuffle_init(); 
+                  }
+                  catch(e) {
+                  console.log(e.stack);
+                  }
+} );
 
 function shuffle_init() {
                 var shuffle_count = 4;
