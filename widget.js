@@ -14,6 +14,19 @@ function shuffle_init() {
                 var dataShare = gapi.hangout.data;
                 var user_list = [];
 
+								s = dataShare.getState();
+								if ( 'user_list' in s ) {
+												id = s['id'];
+												user_list = eval(s['user_list']);
+												$('#testlist').empty();
+												for ( var i = 0; i < user_list.length; i++ ) {
+																var user = user_list[i];
+																var username = Object.keys( user )[0];
+																var user_id = user[username];
+																$('#testlist').prepend("<li data-id='id-" + user_id +"'>" + username + "</li>");
+												}
+								}
+
                 dataShare.onMessageReceived.add( function(e) {
                    if ( e.message == 'do_shuffle' )
                        do_shuffle(1, false);
@@ -21,6 +34,10 @@ function shuffle_init() {
 
                 dataShare.onStateChanged.add( function(e) {
                                 s = dataShare.getState();
+																if ('id' in e.addedKeys) {
+																				id = s['id'];
+																}
+
                                 if ('user_list' in e.addedKeys) {
                                   user_list = eval(s['user_list']);
                                   $('#testlist').empty();
@@ -60,6 +77,7 @@ function shuffle_init() {
                         // Share the new user with other clients
                         var user_list_json = JSON.stringify( user_list );
                         dataShare.setValue( 'user_list', user_list_json );
+                        dataShare.setValue( 'id', id );
 
                         // update UI
                         $('#testlist').prepend("<li data-id='id-" + id +"'>" + newUser + "</li>");
