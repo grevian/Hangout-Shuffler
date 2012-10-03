@@ -8,8 +8,9 @@
     <![CDATA[
       <script src="//talkgadget.google.com/hangouts/_/api/hangout.js?v=1.2"></script>
       <script src="//code.jquery.com/jquery-1.8.2.min.js"></script> 
-      <script src="//raw.github.com/gist/3823954/78485174cfcd07766322530709c9e9c8c1d5e976/widget-min.js"></script> 
-      <link rel="stylesheet" href="//raw.github.com/gist/3823962/19b278e803b4caae0b6532aa8ebf6c0ae1fb7462/widget.css" />
+      <script src="//raw.github.com/grevian/Hangout-Shuffler/master/jquery.quicksand.js"></script> 
+      <script src="//raw.github.com/grevian/Hangout-Shuffler/master/widget.js"></script> 
+      <link rel="stylesheet" href="//raw.github.com/grevian/Hangout-Shuffler/master/widget.css" />
 
       <h1>Shuffli<a href="" id="secret-click" tabindex="-1">n</a>'</h1>                
       <div id="secret" style="display: none;">
