@@ -28,18 +28,27 @@ function shuffle_init() {
         }
 
         dataShare.onMessageReceived.add( function(e) {
-                if ( e.message == 'do_shuffle' )
+								console.log("Message Received");
+								console.log(e);
+                if ( e.message == 'do_shuffle' ) {
+												console.log("Doing a shuffle");
                         do_shuffle(1, false);
+								}
         });
 
         dataShare.onStateChanged.add( function(e) {
+								console.log("onStateChanged called");
+								console.log(e);
                 s = dataShare.getState();
                 if ('id' in e.addedKeys) {
                         id = s['id'];
+												console.log("Set ID to " + id);
                 }
 
                 if ('user_list' in e.addedKeys) {
                         user_list = eval(s['user_list']);
+												console.log("Updating user_list");
+												console.log(user_list);
                         $('#testlist').empty();
                         for ( var i = 0; i < user_list.length; i++ ) {
                                 var user = user_list[i];
@@ -50,6 +59,8 @@ function shuffle_init() {
                 }
                 if ('shuffle_to' in e.addedKeys ) {
                         var shuffled_users = eval( s['shuffle_to'] );
+												console.log("Shuffling to a specific order");
+												console.log(shuffled_users);
 
                         // Create the model to animate to
                         var p = $('<ul/>');
