@@ -43,7 +43,7 @@ function shuffle_init() {
 
 								for( var j = 0; j < e.removedKeys.length; j++ ) {
 												var evt = e.removedKeys[j];
-												if ( e.removedKeys.indexOf('user_list') >= 0 ) {
+												if ( evt.key == 'user_list' ) {
 																$('#testlist').empty();
 																user_list = [];
 																id = 0;
