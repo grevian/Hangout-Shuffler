@@ -40,12 +40,16 @@ function shuffle_init() {
 								console.log("onStateChanged called");
 								console.log(e);
                 s = dataShare.getState();
-                if ('id' in e.addedKeys) {
+                if ( e.addedKeys.indexOf('id') >= 0 ) {
                         id = s['id'];
 												console.log("Set ID to " + id);
                 }
 
-                if ('user_list' in e.addedKeys) {
+								if ( e.removedKeys.indexOf('user_list') >= 0 ) {
+												// Do Reset
+								}
+
+                if ( e.addedKeys.indexOf('user_list') >= 0 ) {
                         user_list = eval(s['user_list']);
 												console.log("Updating user_list");
 												console.log(user_list);
@@ -57,7 +61,7 @@ function shuffle_init() {
                                 $('#testlist').prepend("<li data-id='id-" + user_id +"'>" + username + "</li>");
                         }
                 }
-                if ('shuffle_to' in e.addedKeys ) {
+                if ( e.addedKeys.indexOf('shuffle_to') >= 0 ) {
                         var shuffled_users = eval( s['shuffle_to'] );
 												console.log("Shuffling to a specific order");
 												console.log(shuffled_users);
