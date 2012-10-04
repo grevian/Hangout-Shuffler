@@ -40,42 +40,50 @@ function shuffle_init() {
 								console.log("onStateChanged called");
 								console.log(e);
                 s = dataShare.getState();
-                if ( e.addedKeys.indexOf('id') >= 0 ) {
-                        id = s['id'];
-												console.log("Set ID to " + id);
-                }
 
-								if ( e.removedKeys.indexOf('user_list') >= 0 ) {
-												// Do Reset
+								for( var j = 0; j < e.removedKeys.length; j++ ) {
+												var evt = e.removedKeys[j];
+												if ( e.removedKeys.indexOf('user_list') >= 0 ) {
+																$('#testlist').empty();
+																user_list = [];
+																id = 0;
+												}
 								}
-
-                if ( e.addedKeys.indexOf('user_list') >= 0 ) {
-                        user_list = eval(s['user_list']);
-												console.log("Updating user_list");
-												console.log(user_list);
-                        $('#testlist').empty();
-                        for ( var i = 0; i < user_list.length; i++ ) {
-                                var user = user_list[i];
-                                var username = Object.keys( user )[0];
-                                var user_id = user[username];
-                                $('#testlist').prepend("<li data-id='id-" + user_id +"'>" + username + "</li>");
-                        }
-                }
-                if ( e.addedKeys.indexOf('shuffle_to') >= 0 ) {
-                        var shuffled_users = eval( s['shuffle_to'] );
-												console.log("Shuffling to a specific order");
-												console.log(shuffled_users);
-
-                        // Create the model to animate to
-                        var p = $('<ul/>');
-                        for(var i = 0; i < shuffled_users.length; i++) {
-                                var user = shuffled_users[i];
-                                var username = Object.keys(user)[0];
-                                var current_id = user[username];
-                                p.append( $('<li data-id="id-'+current_id+'">'+username+'</li>') );
-                        }
-                        shuffle_to(p.children());
-                }
+								
+								for( var i = 0; i < e.addedKeys.length; i++ ) {
+												var evt = e.addedKeys[i];
+												if ( evt.key == 'id' ) {
+																id = s['id'];
+																console.log("Set ID to " + id);
+												}
+												if ( evt.key == 'user_list' ) {
+																user_list = eval(s['user_list']);
+																console.log("Updating user_list");
+																console.log(user_list);
+																$('#testlist').empty();
+																for ( var i = 0; i < user_list.length; i++ ) {
+																				var user = user_list[i];
+																				var username = Object.keys( user )[0];
+																				var user_id = user[username];
+																				$('#testlist').prepend("<li data-id='id-" + user_id +"'>" + username + "</li>");
+																}
+												}
+												if ( evt.key == 'shuffle_to' ) {
+																var shuffled_users = eval( s['shuffle_to'] );
+																console.log("Shuffling to a specific order");
+																console.log(shuffled_users);
+																
+																// Create the model to animate to
+																var p = $('<ul/>');
+																for(var i = 0; i < shuffled_users.length; i++) {
+																				var user = shuffled_users[i];
+																				var username = Object.keys(user)[0];
+																				var current_id = user[username];
+																				p.append( $('<li data-id="id-'+current_id+'">'+username+'</li>') );
+																}
+																shuffle_to(p.children());
+												}
+								}
         });
 
         function add_user() {
@@ -106,6 +114,7 @@ function shuffle_init() {
                 $('#shuffle').removeAttr("disabled");
                 $('#adduser').removeAttr("disabled");
                 user_list = [];
+								id = 0;
                 dataShare.clearValue( 'user_list' );
         });
 
